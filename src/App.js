@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, } from 'react-router-dom';
 import Home from './components/Home.js';
 import BackViewer from './components/BackViewer.js';
 
@@ -9,7 +9,7 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='back/:id' element={<BackViewer />} />
+                    <Route path='back/:backId' element={<BackViewer />} />
                     <Route path='*' element={<Navigate replace to='/'/>} />
                 </Routes>
             </BrowserRouter>

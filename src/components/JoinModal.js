@@ -1,14 +1,37 @@
-import React from 'react';
-import { Modal } from 'antd';
+import React, { useState } from 'react';
+import { Modal, Input, Button, message } from 'antd';
+import { isValidString } from '../Util.js'
 
 function JoinModal(props) {
-    //TODO: form에서 접속할 등 번호 입력받아야 함, props로 넘어온 moveToBackViewer 함수 호출해서 navigate만 시키면 됨
+    const [backId, setBackId] = useState('');
+
+    const onOk = () => {
+        if (backId === '' || backId === null || backId === undefined) {
+            message.error('등 번호를 입력하세요.');
+            return;
+        }
+        // TODO: id check해서 존재하는지 확인해봐야 함, 없으면 alert 띄워서 없는 등 번호라고 알려주기
+        props.moveToBackViewer(backId)
+    }
+
+    const onCancel = () => {
+        props.onCancel()
+    }
 
     return (
-        <Modal title="Join Modal" visible={props.visible} onOk={props.onOk} onCancel={props.onCancel}>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+        <Modal title='Join LocaBack'
+            visible={props.visible} onCancel={onCancel}
+            footer={[
+                <Button key='join' type='primary' onClick={onOk} disabled={isValidString(backId)}>
+                    Join
+                </Button>,
+                <Button key='cancel' onClick={onCancel}>
+                    Cancel
+                </Button>
+            ]}
+        >
+            <Input value={backId} onChange={e => {
+                setBackId(e.target.value)}}/>
         </Modal>
     )
 }

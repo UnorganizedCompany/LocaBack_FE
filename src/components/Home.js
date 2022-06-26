@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from 'antd';
 import CreationModal from './CreationModal'
 import JoinModal from './JoinModal'
@@ -6,6 +7,7 @@ import JoinModal from './JoinModal'
 function Home() {
     const [creationModalVisible, setCreationModalVisible] = useState(false);
     const [joinModalVisible, setJoinModalVisible] = useState(false);
+    const navigate = useNavigate();
 
     const openCreationModal = () => {
         setCreationModalVisible(true)
@@ -20,18 +22,32 @@ function Home() {
         setJoinModalVisible(false)
     }
 
-    // TODO: moveToBackViewer - navigate 필요
+    const moveToBackViewer = (backId) => {
+        if (creationModalVisible) {
+            closeCreationModal()
+        }
+        else {
+            closeJoinModal()
+        }
+        navigate('/back/' + backId)
+    }
 
     return (
-        <div>
+        <>
             <h2>
                 home
             </h2>
-            <Button onClick={openCreationModal}>등 생성하기</Button>
-            <Button onClick={openJoinModal}>등 참여하기</Button>
-            <CreationModal visible={creationModalVisible} onOk={openCreationModal} onCancel={closeCreationModal} />
-            <JoinModal visible={joinModalVisible} onOk={openJoinModal} onCancel={closeJoinModal} />
-        </div>
+            <Button onClick={openCreationModal}>Create LocaBack</Button>
+            <Button onClick={openJoinModal}>Join LocaBack</Button>
+            {creationModalVisible &&
+                <CreationModal visible={creationModalVisible}
+                    moveToBackViewer={moveToBackViewer}
+                    onCancel={closeCreationModal} />}
+            {joinModalVisible &&
+                <JoinModal visible={joinModalVisible}
+                    moveToBackViewer={moveToBackViewer}
+                    onCancel={closeJoinModal} />}
+        </>
     )
 }
 
