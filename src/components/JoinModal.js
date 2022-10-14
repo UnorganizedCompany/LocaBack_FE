@@ -1,37 +1,29 @@
 import React, { useState } from 'react';
-import { Modal, Input, Button, message } from 'antd';
-import { isValidString } from '../Util.js'
+import Modal from '@mui/material/Modal';
+import { isValidBackId, modalStyle } from '../Util.js';
+import {Box} from "@mui/material";
+
+// TODO: 버튼 CSS 작성
+// TODO: Join Modal CSS 작성
 
 function JoinModal(props) {
     const [backId, setBackId] = useState('');
 
-    const onOk = () => {
-        if (backId === '' || backId === null || backId === undefined) {
-            message.error('등 번호를 입력하세요.');
-            return;
-        }
-        // TODO: id check해서 존재하는지 확인해봐야 함, 없으면 alert 띄워서 없는 등 번호라고 알려주기
+    const handleJoin = () => {
         props.moveToBackViewer(backId)
     }
 
-    const onCancel = () => {
-        props.onCancel()
-    }
-
     return (
-        <Modal title='Join LocaBack'
-            visible={props.visible} onCancel={onCancel}
-            footer={[
-                <Button key='join' type='primary' onClick={onOk} disabled={isValidString(backId)}>
-                    Join
-                </Button>,
-                <Button key='cancel' onClick={onCancel}>
-                    Cancel
-                </Button>
-            ]}
+        <Modal
+            open={props.open}
+            onClose={props.onClose}
         >
-            <Input value={backId} onChange={e => {
-                setBackId(e.target.value)}}/>
+            <Box sx={modalStyle}>
+                <input value={backId} onChange={e => {
+                    setBackId(e.target.value)}}/>
+                <button onClick={handleJoin} disabled={!isValidBackId(backId)}>참여</button>
+                <button onClick={props.onClose}>취소</button>
+            </Box>
         </Modal>
     )
 }

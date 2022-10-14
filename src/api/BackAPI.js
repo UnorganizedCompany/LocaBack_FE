@@ -1,14 +1,21 @@
-import axios from 'axios'
+import axios from 'axios';
 
 export function getBack(id) {
-    return axios.get('http://127.0.0.1:8000/backs/' + id + '/image', {responseType: 'blob'});
+    return axios.get(
+        'http://localhost:8000/backs/' + id + '/image',
+        {responseType: 'blob'}
+    );
 }
 
-export function postBack(form_data) {
-    console.log(form_data)
-    return axios.post('http://127.0.0.1:8000/backs', form_data, {
-        headers: {
-            'content-type': 'multipart/form-data'
-        }
-    })
+export function postBack(image) {
+    let form_data = new FormData();
+    form_data.append(
+        'image',
+        image,
+        image.name
+    );
+    return axios.post(
+        'http://localhost:8000/backs',
+        form_data
+    );
 }

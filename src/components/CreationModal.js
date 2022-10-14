@@ -1,65 +1,67 @@
 import React, { useState } from 'react';
-import { Modal, Upload, Button, Checkbox } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
+import { Box, Modal } from '@mui/material';
 import { postBack } from '../api/BackAPI';
-import axios from "axios";
+import { modalStyle } from '../Util.js';
+
+// TODO: Upload Input 보기 좋게 작업, 참고자료: https://mui.com/material-ui/react-button/#upload-button
+// TODO: 버튼 CSS 작성
+// TODO: Creation Modal CSS 작성
+// TODO: Child Modal CSS 작성
 
 function CreationModal(props) {
     const [image, setImage] = useState(null);
-    const [uploading, setUploading] = useState(false);
-    const [useDefaultImage, setUseDefaultImage] = useState(false);
+    const [backId, setBackId] = useState('')
+    const [joinModalOpen, setJoinModalOpen] = useState(false);
 
     const handleImageChange = (e) => {
         console.log(e.target.files[0])
         setImage(e.target.files[0])
     };
-    //
-    // const onOk = () => {
-    //     console.log(useDefaultImage)
-    //
-    //     const formData = new FormData();
-    //     if (!useDefaultImage) {
-    //         formData.append('UploadFile', file, file.name)
-    //     }
-    //     setUploading(true);
-    //
-    //
-    //     postBack(formData).then(res => {
-    //         console.log(res)
-    //     }).catch(error => {
-    //         console.log(error)
-    //     });
-    // }
 
-    const onCancel = () => {
-        props.onCancel()
-    }
-
-    const handleSubmit = (e) => {
-        let form_data = new FormData();
-        form_data.append(
-            'image',
-            image,
-            image.name
-        );
-
-        axios.post('http://localhost:8000/backs/', form_data)
+    const handleSubmit = () => {
+        postBack(image)
             .then(response => {
                 console.log(response.data);
+                setBackId(response.data.id)
+                setJoinModalOpen(true)
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+                alert('등 생성에 실패했습니다.')
+            })
+    };
+
+    const handleJoinModalClose = () => {
+        setJoinModalOpen(false)
+        props.onClose()
     };
 
     return (
-        <Modal title='Create LocaBack' visible={props.visible} onCancel={onCancel}>
-            <form>
-                <p>
-                    <input type="file"
-                           id="image"
-                           accept=".png, .jpeg, .jpg" onChange={handleImageChange} required/>
-                </p>
-            </form>
-            <button onClick={handleSubmit}>Upload</button>
+        <Modal
+            open={props.open}
+            onClose={props.onClose}
+        >
+            <Box sx={modalStyle}>
+                <input type="file"
+                       id="image"
+                       accept=".png, .jpeg, .jpg" onChange={handleImageChange} required/>
+                <button onClick={handleSubmit} disabled={ image === null }>생성</button>
+                <button onClick={props.onClose}>취소</button>
+                <Modal
+                    hideBackdrop
+                    open={joinModalOpen}
+                    onClose={handleJoinModalClose}
+                    aria-describedby='child-modal-description'
+                >
+                    <Box sx={{ ...modalStyle, width: 200 }}>
+                        <p id='child-modal-description'>
+                            생성된 등 번호는 {backId}입니다. 바로 참여하시겠습니까?
+                        </p>
+                        <button onClick={() => { props.moveToBackViewer(backId) }}>참여</button>
+                        <button onClick={handleJoinModalClose}>취소</button>
+                    </Box>
+                </Modal>
+            </Box>
         </Modal>
     )
 }

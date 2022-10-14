@@ -1,53 +1,55 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'antd';
 import CreationModal from './CreationModal'
 import JoinModal from './JoinModal'
+import Button from '@mui/material/Button';
+import './Home.css'
+
+// TODO: 홈 배경 이미지 만들고 적용하기
+// TODO: 버튼 CSS 작성
 
 function Home() {
-    const [creationModalVisible, setCreationModalVisible] = useState(false);
-    const [joinModalVisible, setJoinModalVisible] = useState(false);
+    const [creationModalOpen, setCreationModalOpen] = useState(false);
+    const [joinModalOpen, setJoinModalOpen] = useState(false);
     const navigate = useNavigate();
 
     const openCreationModal = () => {
-        setCreationModalVisible(true)
+        setCreationModalOpen(true)
     }
     const closeCreationModal = () => {
-        setCreationModalVisible(false)
+        setCreationModalOpen(false)
     }
     const openJoinModal = () => {
-        setJoinModalVisible(true)
+        setJoinModalOpen(true)
     }
     const closeJoinModal = () => {
-        setJoinModalVisible(false)
+        setJoinModalOpen(false)
     }
 
     const moveToBackViewer = (backId) => {
-        if (creationModalVisible) {
+        if (creationModalOpen) {
             closeCreationModal()
         }
-        else {
+        if (joinModalOpen) {
             closeJoinModal()
         }
         navigate('/back/' + backId)
     }
 
     return (
-        <>
-            <h2>
-                home
-            </h2>
-            <Button onClick={openCreationModal}>Create LocaBack</Button>
-            <Button onClick={openJoinModal}>Join LocaBack</Button>
-            {creationModalVisible &&
-                <CreationModal visible={creationModalVisible}
+        <div id='home-div'>
+            <img src='/defaultBack.PNG' alt=''/>
+            <Button id='create-btn' onClick={openCreationModal}>등 생성하기</Button>
+            <Button id='join-btn' onClick={openJoinModal}>등 참여하기</Button>
+            {creationModalOpen &&
+                <CreationModal open={creationModalOpen}
                     moveToBackViewer={moveToBackViewer}
-                    onCancel={closeCreationModal} />}
-            {joinModalVisible &&
-                <JoinModal visible={joinModalVisible}
+                    onClose={closeCreationModal} />}
+            {joinModalOpen &&
+                <JoinModal open={joinModalOpen}
                     moveToBackViewer={moveToBackViewer}
-                    onCancel={closeJoinModal} />}
-        </>
+                    onClose={closeJoinModal} />}
+        </div>
     )
 }
 
