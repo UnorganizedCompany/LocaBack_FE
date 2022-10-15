@@ -15,7 +15,7 @@ export function postBack(image) {
         image.name
     );
     return axios.post(
-        'http://localhost:8000/backs',
+        'http://localhost:8000/backs/',
         form_data
     );
 }

@@ -3,6 +3,9 @@ import { useNavigate, useParams } from 'react-router-dom';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { Stack, IconButton } from '@mui/material';
 import { getBack } from '../api/BackAPI';
+import './BackViewer.css'
+
+// TODO: 효자손 이미지로 점 표시하기
 
 function BackViewer() {
     const [image, setImage] = useState('');
@@ -39,7 +42,14 @@ function BackViewer() {
         };
         ws.current.onmessage = (evt) => {
             // TODO: Welcome message 재문이가 못지운다고 하면 여기서 처리할 것
-            setPoint(JSON.parse(evt.data));
+            const img = document.getElementById('back-img')
+            const imageWidth = img.clientWidth;
+            const imageHeight = img.clientHeight;
+
+            let p = Object()
+            p.x = JSON.parse(evt.data).x * imageWidth - 5
+            p.y = JSON.parse(evt.data).y * imageHeight - 5
+            setPoint(p);
         };
 
         return () => {
@@ -69,8 +79,6 @@ function BackViewer() {
         );
     }
 
-    // TODO: 이미지 그릴 때 divice width, height 받아서 height 90%랑 width 비교한 뒤 가로 세로랑도 비교해서 어디에 맞춰서 그릴지 정해야 함
-    // TODO: point 값과 기타 size 가지고 긁을 위치 그려야 함
     return (
         <div id='viewer-div'>
             <Stack direction='row'>
@@ -78,11 +86,16 @@ function BackViewer() {
                     <HomeRoundedIcon/>
                 </IconButton>
                 <p>
-                    등 #{backId} {point.x} {point.y}
+                    등 #{backId}
                 </p>
             </Stack>
-            <div style={{'textAlign': 'center'}}>
-                <img style={{'width': '100%'}} src={image} onClick={handleBackClick} alt=''/>
+            <div id='img-div'>
+                <img id='back-img' src={image} onClick={handleBackClick} alt=''/>
+                <div id='svg-div' style={{left: point.x, top: point.y}}>
+                    <svg>
+                        <circle cx='5' cy='5' r='5'/>
+                    </svg>
+                </div>
             </div>
         </div>
     )

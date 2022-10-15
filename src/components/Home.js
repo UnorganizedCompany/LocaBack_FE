@@ -38,7 +38,7 @@ function Home() {
 
     return (
         <div id='home-div'>
-            <img src='/defaultBack.PNG' alt=''/>
+            <img src='/1.PNG' alt=''/>
             <Button id='create-btn' onClick={openCreationModal}>등 생성하기</Button>
             <Button id='join-btn' onClick={openJoinModal}>등 참여하기</Button>
             {creationModalOpen &&
