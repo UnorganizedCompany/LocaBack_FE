@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/LocaBack_FE/static/css/main.f67cfde5.css",
+    "main.js": "/LocaBack_FE/static/js/main.0be68b88.js",
+    "static/js/787.c1112931.chunk.js": "/LocaBack_FE/static/js/787.c1112931.chunk.js",
+    "index.html": "/LocaBack_FE/index.html",
+    "main.f67cfde5.css.map": "/LocaBack_FE/static/css/main.f67cfde5.css.map",
+    "main.0be68b88.js.map": "/LocaBack_FE/static/js/main.0be68b88.js.map",
+    "787.c1112931.chunk.js.map": "/LocaBack_FE/static/js/787.c1112931.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f67cfde5.css",
+    "static/js/main.0be68b88.js"
+  ]
+}
