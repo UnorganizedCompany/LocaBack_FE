@@ -27,7 +27,7 @@ function BackViewer() {
                 navigate('/');
             })
 
-        const webSocketUrl = 'ws://localhost:8000/backs/' + backId
+        const webSocketUrl = 'ws://ec2-43-206-108-9.ap-northeast-1.compute.amazonaws.com:8000/backs/' + backId
         ws.current = new WebSocket(webSocketUrl);
         ws.current.onopen = () => {
             console.log("connected to " + webSocketUrl);
