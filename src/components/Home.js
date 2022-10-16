@@ -8,7 +8,6 @@ import './Home.css'
 import light_back_scratcher from '../images/light_back_scratcher.png'
 import dark_back_scratcher from '../images/dark_back_scratcher.png'
 
-// TODO: 버튼 CSS 작성
 function Home() {
     const [creationModalOpen, setCreationModalOpen] = useState(false);
     const [joinModalOpen, setJoinModalOpen] = useState(false);
