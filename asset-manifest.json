@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/LocaBack_FE/static/css/main.d1c24596.css",
+    "main.css": "/LocaBack_FE/static/css/main.777189b5.css",
     "main.js": "/LocaBack_FE/static/js/main.80f0352a.js",
     "static/js/787.c1112931.chunk.js": "/LocaBack_FE/static/js/787.c1112931.chunk.js",
     "static/media/light_back_scratcher.png": "/LocaBack_FE/static/media/light_back_scratcher.49faf0d3a84fdcc9553a.png",
     "static/media/dark_back_scratcher.png": "/LocaBack_FE/static/media/dark_back_scratcher.5100c5f75c5299ed264c.png",
     "index.html": "/LocaBack_FE/index.html",
-    "main.d1c24596.css.map": "/LocaBack_FE/static/css/main.d1c24596.css.map",
+    "main.777189b5.css.map": "/LocaBack_FE/static/css/main.777189b5.css.map",
     "main.80f0352a.js.map": "/LocaBack_FE/static/js/main.80f0352a.js.map",
     "787.c1112931.chunk.js.map": "/LocaBack_FE/static/js/787.c1112931.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d1c24596.css",
+    "static/css/main.777189b5.css",
     "static/js/main.80f0352a.js"
   ]
 }
