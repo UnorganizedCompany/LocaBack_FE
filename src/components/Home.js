@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ImageList, ImageListItem } from '@mui/material';
 import CreationModal from './CreationModal'
 import JoinModal from './JoinModal'
 import Button from '@mui/material/Button';
 import './Home.css'
+import light_back_scratcher from '../images/light_back_scratcher.png'
+import dark_back_scratcher from '../images/dark_back_scratcher.png'
 
-// TODO: 홈 배경 이미지 만들고 적용하기
 // TODO: 버튼 CSS 작성
-
 function Home() {
     const [creationModalOpen, setCreationModalOpen] = useState(false);
     const [joinModalOpen, setJoinModalOpen] = useState(false);
     const navigate = useNavigate();
+    const imgSize = 100;
+    const col = Math.ceil(window.innerWidth / imgSize)
+    const row = Math.ceil(window.innerHeight / imgSize)
+    const images = [...Array(col * row)].map((_, index) => {
+        if (((index % col) + Math.floor(index / col)) % 2 === 0)
+            return light_back_scratcher
+        else
+            return dark_back_scratcher
+
+    })
 
     const openCreationModal = () => {
         setCreationModalOpen(true)
@@ -38,7 +49,17 @@ function Home() {
 
     return (
         <div id='home-div'>
-            <img src='/defaultBack.PNG' alt=''/>
+            <ImageList id='home-background' cols={col} rowHeight={imgSize}>
+                {images.map((image, index) => (
+                    <ImageListItem key={index}>
+                        <img
+                            src={image}
+                            alt=''
+                            width={imgSize}
+                        />
+                    </ImageListItem>
+                ))}
+            </ImageList>
             <Button id='create-btn' onClick={openCreationModal}>등 생성하기</Button>
             <Button id='join-btn' onClick={openJoinModal}>등 참여하기</Button>
             {creationModalOpen &&

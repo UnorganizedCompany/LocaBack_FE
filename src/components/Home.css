@@ -7,15 +7,20 @@
     justify-content: center;
 }
 
-#home-div > img {
-    object-fit: contain;
-    height: 100vh;
+#home-div > #home-background {
+    height: calc(var(--vh, 1vh) * 100);
     width: 100vw;
+    margin: 0;
+    gap: 0!important;
+    overflow: hidden;
 }
 
-#home-div > #create-btn {
-    position: absolute;
-    top: 50%;
+#home-div > #home-background > li > img {
+    height: 100px;
+    width: 100px;
+}
+
+#home-div > button {
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
@@ -29,17 +34,12 @@
     height: 10%;
 }
 
+#home-div > #create-btn {
+    position: absolute;
+    top: 50%;
+}
+
 #home-div > #join-btn {
     position: absolute;
     top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    background-color: #555;
-    color: white;
-    font-size: 16px;
-    padding: 12px 24px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
 }
