@@ -21,3 +21,8 @@ code {
   height: 100%;
   display: flex;
 }
+
+:root {
+  --maincolor : #4A171E;
+  --subcolor: #E2B143;
+}

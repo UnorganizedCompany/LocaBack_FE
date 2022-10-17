@@ -4,9 +4,36 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: 50%;
-    background: #FFFFFF;
-    border: 5px solid #4A171E;
+    background: white;
+    border: 5px solid var(--maincolor);
     border-radius: 20px;
     padding: 20px;
     max-width: 400px;
+}
+
+#modal-box > #button-div {
+    width: 100%;
+    height: 40px;
+    display: flex;
+}
+
+#modal-box > #button-div > button {
+    width: 50%;
+    height: 100%;
+    color: var(--maincolor);
+}
+
+#modal-box > #button-div > #primary {
+    background: var(--subcolor);
+    margin-right: 5px;
+}
+
+#modal-box > #button-div > #primary[disabled] {
+    background: lightgray;
+    margin-right: 5px;
+}
+
+#modal-box > #button-div > #cancel {
+    background: white;
+    margin-left: 5px;
 }

@@ -24,11 +24,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
-    background-color: #FFFFFF;
-    color: #4A171E;
+    background-color: white;
+    color: var(--maincolor);
     font-size: 16px;
     padding: 0;
-    border: 5px solid #4A171E;
+    border: 5px solid var(--maincolor);
     cursor: pointer;
     border-radius: 20px;
     height: 8%;
