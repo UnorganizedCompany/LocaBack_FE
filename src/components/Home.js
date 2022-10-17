@@ -63,8 +63,8 @@ function Home() {
             <Button id='join-btn' onClick={openJoinModal}>등 참여하기</Button>
             {creationModalOpen &&
                 <CreationModal open={creationModalOpen}
-                    moveToBackViewer={moveToBackViewer}
-                    onClose={closeCreationModal} />}
+                   moveToBackViewer={moveToBackViewer}
+                   onClose={closeCreationModal} />}
             {joinModalOpen &&
                 <JoinModal open={joinModalOpen}
                     moveToBackViewer={moveToBackViewer}

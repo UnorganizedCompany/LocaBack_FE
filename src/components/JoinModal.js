@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import Modal from '@mui/material/Modal';
-import { isValidBackId, modalStyle } from '../Util.js';
-import {Box} from "@mui/material";
-
-// TODO: 버튼 CSS 작성
-// TODO: Join Modal CSS 작성
+import { Modal, Box, Button } from '@mui/material';
+import { isValidBackId } from '../Util.js';
+import './Modal.css'
 
 function JoinModal(props) {
-    const [backId, setBackId] = useState('');
+    const [backId, setBackId] = useState(props.backId ?? '');
 
     const handleJoin = () => {
         props.moveToBackViewer(backId)
@@ -18,11 +15,28 @@ function JoinModal(props) {
             open={props.open}
             onClose={props.onClose}
         >
-            <Box sx={modalStyle}>
-                <input value={backId} onChange={e => {
-                    setBackId(e.target.value)}}/>
-                <button onClick={handleJoin} disabled={!isValidBackId(backId)}>참여</button>
-                <button onClick={props.onClose}>취소</button>
+            <Box id='modal-box'>
+                <div id='join-input-div'>
+                    {
+                        props.backId === undefined
+                        ? <input value={backId} onChange={e => { setBackId(e.target.value) }}/>
+                        : <p>생성된 등 번호는 {backId}입니다.<br/>
+                            바로 참여하시겠습니까?</p>
+                    }
+                </div>
+                <div id='button-div'>
+                    <Button
+                        id='primary'
+                        onClick={handleJoin}
+                        disabled={!isValidBackId(backId) && props.backId === undefined}>
+                        참여
+                    </Button>
+                    <Button
+                        id='cancel'
+                        onClick={props.onClose}>
+                        취소
+                    </Button>
+                </div>
             </Box>
         </Modal>
     )
