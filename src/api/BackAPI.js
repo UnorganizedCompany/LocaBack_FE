@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export function getBack(id) {
     return axios.get(
-        'ec2-43-206-108-9.ap-northeast-1.compute.amazonaws.com:8000/backs/' + id + '/image',
+        'http://ec2-43-206-108-9.ap-northeast-1.compute.amazonaws.com:8000/backs/' + id + '/image',
         {responseType: 'blob'}
     );
 }
@@ -15,7 +15,7 @@ export function postBack(image) {
         image.name
     );
     return axios.post(
-        'ec2-43-206-108-9.ap-northeast-1.compute.amazonaws.com:8000/backs/',
+        'http://ec2-43-206-108-9.ap-northeast-1.compute.amazonaws.com:8000/backs/',
         form_data
     );
 }
