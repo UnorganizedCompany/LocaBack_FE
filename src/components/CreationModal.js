@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Box, Modal } from '@mui/material';
+import { Box, Modal, Button } from '@mui/material';
 import { postBack } from '../api/BackAPI';
-import { modalStyle } from '../Util.js';
+import './CreationModal.css'
+
 
 // TODO: Upload Input 보기 좋게 작업, 참고자료: https://mui.com/material-ui/react-button/#upload-button
 // TODO: 버튼 CSS 작성
@@ -38,22 +39,30 @@ function CreationModal(props) {
 
     return (
         <Modal
+            id='creation-modal'
             open={props.open}
             onClose={props.onClose}
         >
-            <Box sx={modalStyle}>
-                <input type="file"
-                       id="image"
-                       accept=".png, .jpeg, .jpg" onChange={handleImageChange} required/>
-                <button onClick={handleSubmit} disabled={ image === null }>생성</button>
-                <button onClick={props.onClose}>취소</button>
+            <Box id='modal-box'>
+                <div id='input-div'>
+                    <input type="file"
+                           id="image-input"
+                           accept="image/*"
+                           onChange={handleImageChange}
+                    />
+                </div>
+                <div id='button-div'>
+                    <Button onClick={handleSubmit} disabled={ image === null }>생성</Button>
+                    <Button onClick={props.onClose}>취소</Button>
+                </div>
                 <Modal
+                    id='join-modal'
                     hideBackdrop
                     open={joinModalOpen}
                     onClose={handleJoinModalClose}
                     aria-describedby='child-modal-description'
                 >
-                    <Box sx={{ ...modalStyle, width: 200 }}>
+                    <Box id='modal-box'>
                         <p id='child-modal-description'>
                             생성된 등 번호는 {backId}입니다. 바로 참여하시겠습니까?
                         </p>
