@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Box, Button } from '@mui/material';
+import { PhotoCamera } from '@mui/icons-material';
 import { postBack } from '../api/BackAPI';
 import JoinModal from './JoinModal';
 import './Modal.css'
@@ -38,11 +39,19 @@ function CreationModal(props) {
             >
                 <Box id='modal-box'>
                     <div id='creation-input-div'>
-                        <input type="file"
-                               id="image-input"
-                               accept="image/*"
-                               onChange={handleImageChange}
-                        />
+                        <Button
+                            id='image-upload-button'
+                            component='label'
+                            startIcon={<PhotoCamera />}
+                        >
+                            등 사진 업로드
+                            <input
+                                hidden
+                                accept='image/*'
+                                type='file'
+                                onChange={handleImageChange}
+                            />
+                        </Button>
                     </div>
                     <div id='button-div'>
                         <Button

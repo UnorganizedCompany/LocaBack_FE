@@ -25,4 +25,5 @@ code {
 :root {
   --maincolor : #4A171E;
   --subcolor: #E2B143;
+  --disabled: #DDDDDD;
 }

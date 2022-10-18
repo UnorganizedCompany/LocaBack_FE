@@ -19,8 +19,11 @@ function JoinModal(props) {
                 <div id='join-input-div'>
                     {
                         props.backId === undefined
-                        ? <input value={backId} onChange={e => { setBackId(e.target.value) }}/>
-                        : <p>생성된 등 번호는 {backId}입니다.<br/>
+                        ? <div id='id-input-div'>
+                            <p>ID:&ensp;</p>
+                            <input value={backId} onChange={e => { setBackId(e.target.value) }}/>
+                        </div>
+                        : <p>생성된 등 ID는 {backId}입니다.<br/>
                             바로 참여하시겠습니까?</p>
                     }
                 </div>

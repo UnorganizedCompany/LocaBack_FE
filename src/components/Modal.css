@@ -11,6 +11,50 @@
     max-width: 400px;
 }
 
+#modal-box > #creation-input-div {
+    width: 100%;
+    height: 60px;
+}
+
+#modal-box > #creation-input-div > #image-upload-button {
+    width: 100%;
+    color: var(--maincolor);
+    border: 1px solid var(--maincolor);
+}
+
+#modal-box > #join-input-div {
+    width: 100%;
+}
+
+/* 생성한 등에 바로 참여할지에 대한 안내문 */
+#modal-box > #join-input-div > p {
+    font-size: 14px;
+}
+
+#modal-box > #join-input-div > #id-input-div {
+    display: flex;
+    justify-content: center;
+}
+
+#modal-box > #join-input-div > #id-input-div > input {
+    height: 30px;
+    box-sizing : border-box;
+    width: 100%;
+    margin: auto;
+    display: block;
+    border: 1px solid var(--subcolor);
+    border-radius: 5px;
+}
+
+#modal-box > #join-input-div > #id-input-div > input:focus {
+    border: 1px solid var(--maincolor);
+    outline: none !important
+}
+
+#modal-box > #join-input-div > #id-input-div > p {
+    font-size: 14px;
+}
+
 #modal-box > #button-div {
     width: 100%;
     height: 40px;
@@ -29,7 +73,8 @@
 }
 
 #modal-box > #button-div > #primary[disabled] {
-    background: lightgray;
+    background: white;
+    color: var(--disabled);
     margin-right: 5px;
 }
 
