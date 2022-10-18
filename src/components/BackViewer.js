@@ -6,9 +6,6 @@ import { getBack } from '../api/BackAPI';
 import './BackViewer.css'
 import light_back_scratcher from '../images/light_back_scratcher.png'
 
-// TODO: div는 화면 전체로, 하지만 Img는 실제 크기만 차지하면 좋겠음(다른 곳 클릭해도 효자손 안뜨게)
-// TODO: 상단 10% 헤더, 하단 90% 등 사진, 헤더 CSS 적용
-
 function BackViewer() {
     const [image, setImage] = useState('');
     const [point, setPoint] = useState({x: null, y: null});
@@ -84,7 +81,7 @@ function BackViewer() {
 
     return (
         <div id='viewer-div'>
-            <Stack direction='row'>
+            <Stack id='header-div' direction='row'>
                 <IconButton onClick={() => { navigate('/') }}>
                     <HomeRoundedIcon/>
                 </IconButton>
