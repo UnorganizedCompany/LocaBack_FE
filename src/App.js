@@ -9,7 +9,7 @@ function App() {
             <HashRouter>
                 <Routes>
                     <Route path='/' element={<Home />} />
-                    <Route path='back/:backId' element={<BackViewer />} />
+                    <Route path='/back/:backId' element={<BackViewer />} />
                     <Route path='*' element={<Navigate replace to='/'/>} />
                 </Routes>
             </HashRouter>
