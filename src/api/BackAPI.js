@@ -1,5 +1,5 @@
 import axios from 'axios';
-// const base_url = 'https://ec2-43-206-108-9.ap-northeast-1.compute.amazonaws.com:8000/'
+// const base_url = 'ec2-43-206-108-9.ap-northeast-1.compute.amazonaws.com:8000/'
 const base_url = 'http://localhost:8000/'
 
 export function getBack(id) {
