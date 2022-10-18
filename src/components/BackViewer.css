@@ -18,21 +18,27 @@
     width: 100vw;
 }
 
-#viewer-div > #img-div > #svg-div {
+#viewer-div > #img-div > #scratcher-div {
     position: absolute;
-    width: 10px;
-    height: 10px;
+    width: 50px;
+    height: 50px;
     z-index: 999;
+    animation: MoveUpDown 1s linear infinite;
 }
 
-#viewer-div > #img-div > #svg-div > svg {
-    width: 10px;
-    height: 10px;
+#viewer-div > #img-div > #scratcher-div > img {
+    width: 50px;
+    height: 50px;
     z-index: 999;
     display: block;
 }
 
-#viewer-div > #img-div > #svg-div > svg > circle {
-    stroke: none;
-    fill: red;
+@keyframes MoveUpDown {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+
 }

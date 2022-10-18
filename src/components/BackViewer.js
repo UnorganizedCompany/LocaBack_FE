@@ -4,8 +4,10 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { Stack, IconButton } from '@mui/material';
 import { getBack } from '../api/BackAPI';
 import './BackViewer.css'
+import light_back_scratcher from '../images/light_back_scratcher.png'
 
-// TODO: 효자손 이미지로 점 표시하기
+// TODO: div는 화면 전체로, 하지만 Img는 실제 크기만 차지하면 좋겠음(다른 곳 클릭해도 효자손 안뜨게)
+// TODO: 상단 10% 헤더, 하단 90% 등 사진, 헤더 CSS 적용
 
 function BackViewer() {
     const [image, setImage] = useState('');
@@ -16,7 +18,6 @@ function BackViewer() {
     let ws = useRef(null);
 
     useEffect(() => {
-        console.log(backId);
         getBack(backId)
             .then(response => {
                 setImage(URL.createObjectURL(response.data))
@@ -27,6 +28,7 @@ function BackViewer() {
                 navigate('/');
             })
 
+        // const webSocketUrl = 'ws://localhost:8000/backs/' + backId
         const webSocketUrl = 'ws://ec2-43-206-108-9.ap-northeast-1.compute.amazonaws.com:8000/backs/' + backId
         ws.current = new WebSocket(webSocketUrl);
         ws.current.onopen = () => {
@@ -41,15 +43,16 @@ function BackViewer() {
             console.log(error);
         };
         ws.current.onmessage = (evt) => {
-            // TODO: Welcome message 재문이가 못지운다고 하면 여기서 처리할 것
             const img = document.getElementById('back-img')
             const imageWidth = img.clientWidth;
             const imageHeight = img.clientHeight;
 
             let p = Object()
-            p.x = JSON.parse(evt.data).x * imageWidth - 5
+            p.x = JSON.parse(evt.data).x * imageWidth - 15
             p.y = JSON.parse(evt.data).y * imageHeight - 5
-            setPoint(p);
+
+            if (!isNaN(p.x) && !isNaN(p.y))
+                setPoint(p);
         };
 
         return () => {
@@ -91,11 +94,10 @@ function BackViewer() {
             </Stack>
             <div id='img-div'>
                 <img id='back-img' src={image} onClick={handleBackClick} alt=''/>
-                <div id='svg-div' style={{left: point.x, top: point.y}}>
-                    <svg>
-                        <circle cx='5' cy='5' r='5'/>
-                    </svg>
-                </div>
+                {point.x !== null && point.y !== null
+                    && <div id='scratcher-div' style={{left: point.x, top: point.y}}>
+                        <img src={light_back_scratcher} alt=''/>
+                    </div>}
             </div>
         </div>
     )
