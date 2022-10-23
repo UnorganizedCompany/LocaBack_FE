@@ -5,3 +5,8 @@ export const isValidBackId = (string) => {
         string !== undefined &&
         string.length === 6
 };
+
+export function setScreenSize() {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}

@@ -13,13 +13,6 @@
     display: table;
 }
 
-#viewer-div > #img-div {
-    height: 95%;
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-}
-
 #viewer-div > #header-div > button {
     color: var(--maincolor);
 }
@@ -31,10 +24,19 @@
     padding-right: 8px;
 }
 
-#viewer-div > #img-div > img {
-    object-fit: contain;
-    height: 100%;
+
+#viewer-div > #img-div {
+    height: 95%;
     width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+#viewer-div > #img-div > img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
 }
 
 #viewer-div > #img-div > #scratcher-div {

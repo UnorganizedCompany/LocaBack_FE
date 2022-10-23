@@ -5,14 +5,50 @@ import { Stack, IconButton } from '@mui/material';
 import { getBack } from '../api/BackAPI';
 import './BackViewer.css'
 import light_back_scratcher from '../images/light_back_scratcher.png'
+import { setScreenSize } from '../Util';
+
+setScreenSize();
 
 function BackViewer() {
     const [image, setImage] = useState('');
-    const [point, setPoint] = useState({x: null, y: null});
+    const [point, setPoint] = useState({x: -1, y: -1});
+    const [imageStyle, setImageStyle] = useState({top: 0, left: 0, width: 0, height: 0});
     const { backId } = useParams();
     const navigate = useNavigate();
-
     let ws = useRef(null);
+
+    function handleResize() {
+        setScreenSize();
+        setImageStyle(getImageStyle())
+    }
+
+    function onLoad() {
+        setImageStyle(getImageStyle())
+    }
+
+    function getImageStyle() {
+        const img_width = document.getElementById('back-img').naturalWidth;
+        const img_height = document.getElementById('back-img').naturalHeight;
+        const client_width = window.innerWidth
+        const client_height = window.innerHeight * 0.95
+        const min_ratio = Math.min((client_width / img_width), (client_height/ img_height))
+        const resize_img_width = img_width * min_ratio
+        const resize_img_height = img_height * min_ratio
+
+        return {
+            top: (client_height - resize_img_height) / 2,
+            left: (client_width - resize_img_width) / 2,
+            width: resize_img_width,
+            height: resize_img_height
+        }
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
 
     useEffect(() => {
         getBack(backId)
@@ -69,8 +105,6 @@ function BackViewer() {
         if (normalizeX < 0 || normalizeY < 0 || normalizeX > 1 || normalizeY > 1)
             return;
 
-        // TODO: 모바일에서 확대되었을 때 위치 어떻게 그려지는지 확인해야 함
-        console.log(normalizeX, normalizeY)
         ws.current.send(
             JSON.stringify({
                 'x': normalizeX,
@@ -90,9 +124,19 @@ function BackViewer() {
                 </p>
             </Stack>
             <div id='img-div'>
-                <img id='back-img' src={image} onClick={handleBackClick} alt=''/>
-                {point.x !== null && point.y !== null
-                    && <div id='scratcher-div' style={{left: point.x, top: point.y}}>
+                <img
+                    id='back-img'
+                    src={image}
+                    onClick={handleBackClick}
+                    alt=''
+                    style={{
+                        width: imageStyle.width,
+                        height: imageStyle.height
+                    }}
+                    onLoad={onLoad}
+                />
+                {point.x > 0 && point.y > 0
+                    && <div id='scratcher-div' style={{left: point.x + imageStyle.left, top: point.y + imageStyle.top}}>
                         <img src={light_back_scratcher} alt=''/>
                     </div>}
             </div>

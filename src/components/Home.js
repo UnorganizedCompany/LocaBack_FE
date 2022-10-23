@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ImageList, ImageListItem } from '@mui/material';
 import CreationModal from './CreationModal'
@@ -7,6 +7,9 @@ import Button from '@mui/material/Button';
 import './Home.css'
 import light_back_scratcher from '../images/light_back_scratcher.png'
 import dark_back_scratcher from '../images/dark_back_scratcher.png'
+import { setScreenSize } from '../Util';
+
+setScreenSize();
 
 function Home() {
     const [creationModalOpen, setCreationModalOpen] = useState(false);
@@ -15,13 +18,33 @@ function Home() {
     const imgSize = 100;
     const col = Math.ceil(window.innerWidth / imgSize)
     const row = Math.ceil(window.innerHeight / imgSize)
-    const images = [...Array(col * row)].map((_, index) => {
-        if (((index % col) + Math.floor(index / col)) % 2 === 0)
-            return light_back_scratcher
-        else
-            return dark_back_scratcher
+    const [images, setImages] = useState(
+        [...Array(col * row)].map((_, index) => {
+            if (((index % col) + Math.floor(index / col)) % 2 === 0)
+                return light_back_scratcher
+            else
+                return dark_back_scratcher
+        })
+    )
 
-    })
+    function handleResize() {
+        setScreenSize();
+        const _col = Math.ceil(window.innerWidth / imgSize)
+        const _row = Math.ceil(window.innerHeight / imgSize)
+        setImages([...Array(_col * _row)].map((_, index) => {
+            if (((index % _col) + Math.floor(index / _col)) % 2 === 0)
+                return light_back_scratcher
+            else
+                return dark_back_scratcher
+        }))
+    }
+
+    useEffect(() => {
+        window.addEventListener('resize', handleResize)
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
+    }, [])
 
     const openCreationModal = () => {
         setCreationModalOpen(true)
