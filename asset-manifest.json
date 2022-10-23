@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/LocaBack_FE/static/css/main.48eca85c.css",
-    "main.js": "/LocaBack_FE/static/js/main.459d8e42.js",
+    "main.css": "/LocaBack_FE/static/css/main.c74e3197.css",
+    "main.js": "/LocaBack_FE/static/js/main.e3b64d0f.js",
     "static/js/787.c1112931.chunk.js": "/LocaBack_FE/static/js/787.c1112931.chunk.js",
     "static/media/light_back_scratcher.png": "/LocaBack_FE/static/media/light_back_scratcher.49faf0d3a84fdcc9553a.png",
     "static/media/dark_back_scratcher.png": "/LocaBack_FE/static/media/dark_back_scratcher.5100c5f75c5299ed264c.png",
     "index.html": "/LocaBack_FE/index.html",
-    "main.48eca85c.css.map": "/LocaBack_FE/static/css/main.48eca85c.css.map",
-    "main.459d8e42.js.map": "/LocaBack_FE/static/js/main.459d8e42.js.map",
+    "main.c74e3197.css.map": "/LocaBack_FE/static/css/main.c74e3197.css.map",
+    "main.e3b64d0f.js.map": "/LocaBack_FE/static/js/main.e3b64d0f.js.map",
     "787.c1112931.chunk.js.map": "/LocaBack_FE/static/js/787.c1112931.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.48eca85c.css",
-    "static/js/main.459d8e42.js"
+    "static/css/main.c74e3197.css",
+    "static/js/main.e3b64d0f.js"
   ]
 }
